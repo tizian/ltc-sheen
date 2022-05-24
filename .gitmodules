@@ -1,0 +1,6 @@
+[submodule "fitting/ext/pybind11"]
+	path = fitting/ext/pybind11
+	url = http://github.com/pybind/pybind11.git
+[submodule "fitting/ext/pcg32"]
+	path = fitting/ext/pcg32
+	url = https://github.com/wjakob/pcg32

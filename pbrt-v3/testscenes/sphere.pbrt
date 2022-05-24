@@ -1,0 +1,54 @@
+Film "image"
+    "string filename" "sphere.exr"
+    "integer yresolution" [ 1024 ]
+    "integer xresolution" [ 1024 ]
+
+PixelFilter "gaussian"
+
+Scale -1 1 1
+LookAt 14.1 0 0
+       0 0 0
+       0 1 0
+   Camera "perspective"
+       "float fov" [ 9 ]
+
+   Sampler "random"
+       "integer pixelsamples" [ 8 ]
+
+Integrator "path"
+
+WorldBegin
+
+AttributeBegin
+    # Uncomment one of the lines below to select the material type.
+
+    # LTC Sheen
+    Material "sheenltc" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["volume"]
+    #Material "sheenltc" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["approx"]
+
+    # Volume models
+    #Material "sheenvolume" "rgb albedo" [1 1 1] "float density" [1.0] "float sigma" [0.25] "integer maxBounces" [1]
+    #Material "sheenvolume" "rgb albedo" [1 1 1] "float density" [1.0] "float sigma" [0.25] "integer maxBounces" [16]
+
+    # Prior work
+    #Material "sheenbaselines" "color Csheen" [1 1 1]                     "string type" ["burley"]
+    #Material "sheenbaselines" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["neubelt_pettineo"]
+    #Material "sheenbaselines" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["conty_kulla"]
+    #Material "sheenbaselines" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["patry"]
+
+    Shape "sphere" "float radius" [1]
+AttributeEnd
+
+AttributeBegin
+    # Uncomment one of the lines below to select the illumination angle.
+
+    Rotate 0    0 1 0
+    #Rotate 45   0 1 0
+    #Rotate 90   0 1 0
+    #Rotate 130  0 1 0
+    #Rotate 150  0 1 0
+
+    LightSource "distant"  "point to" [ -1 0 0] "rgb L" [1 1 1]
+AttributeEnd
+
+WorldEnd

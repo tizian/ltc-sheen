@@ -1,0 +1,63 @@
+Film "image"
+    "string filename" "cloth.exr"
+    "integer yresolution" [ 500 ]
+    "integer xresolution" [ 500 ]
+
+PixelFilter "gaussian"
+
+Scale -1 1 1
+LookAt -5 7.75 15
+       0 1.15 0
+       0 1 0
+   Camera "perspective"
+       "float fov" [ 14 ]
+
+   Sampler "random"
+       "integer pixelsamples" [ 32 ]
+
+Integrator "path"
+
+WorldBegin
+
+AttributeBegin
+Scale -1 1 1
+Rotate 270 1 0 0
+Rotate 240 0 0 1
+
+LightSource "infinite" "string mapname"
+    "textures/museumplein_1k.exr" "color scale" [1.0 1.0 1.0]
+AttributeEnd
+
+AttributeBegin
+    # Uncomment one of the lines below to select the material type.
+
+    # LTC Sheen
+    Material "sheenltc" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["volume"]
+    #Material "sheenltc" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["approx"]
+
+    # Volume models
+    #Material "sheenvolume" "rgb albedo" [1 1 1] "float density" [1.0] "float sigma" [0.25] "integer maxBounces" [1]
+    #Material "sheenvolume" "rgb albedo" [1 1 1] "float density" [1.0] "float sigma" [0.25] "integer maxBounces" [16]
+
+    # Prior work
+    #Material "sheenbaselines" "color Csheen" [1 1 1]                     "string type" ["burley"]
+    #Material "sheenbaselines" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["neubelt_pettineo"]
+    #Material "sheenbaselines" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["conty_kulla"]
+    #Material "sheenbaselines" "color Csheen" [1 1 1] "float alpha" [0.5] "string type" ["patry"]
+
+    Shape "plymesh" "string filename" ["geometry/cloth.ply"]
+AttributeEnd
+
+AttributeBegin
+    Material "matte" "rgb Kd" [ 0.5 0.5 0.5 ]
+    Shape "plymesh" "string filename" ["geometry/inside.ply"]
+AttributeEnd
+
+AttributeBegin
+    Texture "checker_material" "spectrum" "checkerboard" "float uscale" 150.0 "float vscale" 150.0 "color tex1" [0.1 0.1 0.1] "color tex2" [0.4 0.4 0.4]
+    Material "matte" "texture Kd" "checker_material"
+    Shape "plymesh" "string filename" ["geometry/plane.ply"]
+AttributeEnd
+
+
+WorldEnd
