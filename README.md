@@ -4,7 +4,7 @@
 
 Source code of the talk "Practical Multiple-Scattering Sheen Using Linearly Transformed Cosines" by [Tizian Zeltner](https://tizianzeltner.com/), [Brent Burley](https://www.linkedin.com/in/brent-burley-56972557), and [Matt Jen-Yuan Chiang](https://mattchiangvfx.com) presented at SIGGRAPH 2022.
 
-* The [`pbrt-v3`](pbrt-v3) directory contains our reference implementation of the final [sheen BRDF](pbrt-v3/src/materials/sheenltc.cpp) together with additional baselines and prior work that we compare against in the [supplementary material](TODO).
+* The [`pbrt-v3`](pbrt-v3) directory contains our reference implementation of the final [sheen BRDF](pbrt-v3/src/materials/sheenltc.cpp) together with additional baselines and prior work that we compare against in the [supplementary material](https://tizianzeltner.com/projects/Zeltner2022Practical/supplemental.pdf).
 
 * All code necessary to reproduce the LTC fitting is located in the [`fitting`](fitting) directory.
 
