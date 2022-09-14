@@ -108,7 +108,7 @@ Spectrum SheenNeubeltPettineo::f(const Vector3f &wo, const Vector3f &wi) const {
           D             = 1.f + 4.f*std::exp(exponent) / sinThetaH4,
           denominator   = 4.f*(cosThetaO + cosThetaI - cosThetaO*cosThetaI);
 
-    return Csheen * D * normalization / denominator; //* D; //* normalization / denominator;
+    return Csheen * D * normalization / denominator;
 }
 
 std::string SheenNeubeltPettineo::ToString() const {
@@ -213,6 +213,10 @@ Spectrum SheenPatry::f(const Vector3f &wo, const Vector3f &wi) const {
           density = 1.f;
     sggx::Ellipsoid S = sggx::Ellipsoid::fromFiber(Vector3f(0, 0, 1), sigma);
     Float phaseFunction = sggx::evalPhaseSpecular(wo, wi, S);
+    /* The `cosThetaI * cosThetaO` term below differs from the equations
+       given in the 2020 talk slides and instead comes from
+       "The secret of velvety skin" by Koenderink and Pont 2002, which
+       is cited as the original source of this model. */
     Float tmp1      = CosTheta(wo + wi),
           tmp2      = tmp1 / (cosThetaI * cosThetaO),
           numerator = 1.f - std::exp(-density * tmp2);
