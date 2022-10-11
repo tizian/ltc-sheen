@@ -34,9 +34,9 @@ $$
 
 In terms of reference BRDFs we use two versions in this codebase (which are both impractical to use directly in a renderer):
 
-1. The volumetric layer with a fiber-like SGGX phase function discussed in the talk abstract, where the cross section parameter $\sigma \text{ }\in\text{ } [0, 1]$ <span></span>is mapped to the roughness as $\alpha = \sqrt{\sigma}$. Importantly, this includes multiple-scattering which requires a costly stochastic evaluation via random walks. Further, we are only interested in its _reflected_ component which is poorly importance sampled in some configurations and thus can have unacceptably high variance. ([See code](fitting/src/bsdfs/sheen_volume.h))
+1. The volumetric layer with a fiber-like SGGX phase function discussed in the talk abstract, where the cross section parameter $\sigma \text{ }\in\text{ } [0, 1]$ <span></span>is mapped to the roughness as $\alpha = \sqrt{\sigma}$. Importantly, this includes multiple-scattering which requires a costly stochastic evaluation via random walks. Further, we are only interested in its _reflected_ component which is poorly importance sampled in some configurations and thus can have unacceptably high variance. ([See code](https://github.com/tizian/ltc-sheen/blob/master/fitting/src/bsdfs/sheen_volume.h))
 
-2. An analytic approximation of the above that is very cheap to evaluate. However it cannot directly be importance sampled which also leads to variance in practice. ([See code](fitting/src/bsdfs/sheen_approx.h))
+2. An analytic approximation of the above that is very cheap to evaluate. However it cannot directly be importance sampled which also leads to variance in practice. ([See code](https://github.com/tizian/ltc-sheen/blob/master/fitting/src/bsdfs/sheen_approx.h))
 
 By fitting suitable LTC parameters we can sidestep all of these issues and arrive at BRDFs with efficient evaluation and perfect cosine-weighted importance sampling. Because the cosine is baked in (for sampling efficiency), the resulting BRDF is only approximately reciprocal, which we did not find problematic in practice.
 
